@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "ar-drone": "^0.3.3",
+    "web3": "^0.17.0-beta",
     "wifi-control": "^2.0.0"
   },
   "devDependencies": {},
