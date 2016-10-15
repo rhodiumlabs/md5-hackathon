@@ -1,0 +1,16 @@
+{
+  "name": "md5-search-and-rescue-server",
+  "version": "1.0.0",
+  "description": "Backend for search and rescue server",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Alex Daskalov",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "lodash": "^4.16.4"
+  }
+}
