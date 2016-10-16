@@ -38,7 +38,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <img height={'100px'} style={{border:'10px solid #CCC'}} src="/front-logo.png"/>
+          <img height={'100px'} style={{border:'10px solid #CCC'}} src="front-logo.png"/>
         </div>
         
         <div style={{height:'100px',marginTop:'20px', width:'100%'}}>
@@ -50,6 +50,7 @@ class App extends Component {
 
         <div style={{height:'400px', width:'100%'}}>
           <GoogleMap
+            bootstrapURLKeys={{key: 'AIzaSyC5XWOkErufKgrUrlIfASKMOwXr3PYULFc'}}
             defaultCenter={{lat: 40.698981, lng: -73.974793}}
             defaultZoom={15}>
             <div lat={40.698981} lng={-73.974793} className={'marker'}></div>
