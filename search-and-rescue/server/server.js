@@ -1,11 +1,31 @@
 const express    = require('express');
 const bodyParser = require('body-parser');
 const _          = require('lodash');
+const Web3       = require('web3');
 
+
+// -- Setup
 const app = express();
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+
+const web3 = new Web3();
+web3.setProvider(new web3.providers.HttpProvider('http://localhost:8545'));
+
+console.log(web3.version.api);
+console.log(web3.isConnected());
+console.log(web3.version.node);
+
+const sender = web3.eth.accounts[0];
+
+const amount = web3.toWei(0.001, "ether")
+console.log(`Coinbase: ${coinbase}`);
+
+const balance = web3.eth.getBalance(coinbase);
+console.log(balance.toString(10));
+
+web3.eth.defaultAccount = web3.eth.accounts[0];
 
 
 // -- State
@@ -25,7 +45,7 @@ var searched = {
   [timmy]: {
     bounty: {
       sum: 13.7,
-      address: '0x8e3d6a8496cbac7ea255fe35be5d8e03a419c71a'
+      address: coinbase
     },
     finders: []
   }
@@ -86,13 +106,17 @@ const addToFinders = (device, payTo) => {
 const rewardAndClear = (rescuedDevice) => {
   const rescued = searched[rescuedDevice];
   const finders = rescued.finders;
-  // TODO: Check leftover through web3, pay out with decays
   const rewardRescueTotal = rescued.bounty.sum * rewardProportionRescue;
   getDecayed(rescued.finders).forEach((f) => {
     const payTo = f.recipient;
     const amount = f.reward * rewardRescueTotal;
     console.log(`[ PAY ] ${amount} out of ${rewardRescueTotal} to ${payTo}`);
-    // TODO: Pay: amount to payTo
+    // TODO: send amount to payTo
+    web3.eth.sendTransaction({
+      from: coinbase,
+      to: payTo,
+      value: web3.toWei(amount, "ether")
+    });
   });
   delete searched[rescuedDevice];
 }
@@ -139,11 +163,16 @@ app.post('/find', function (req, res) {
   console.log('POST /find\n' +params());
   const { device, payTo } = req.body;
   const pay = addToFinders(device, payTo);
-  // TODO: Calculate pay by web3 with decay
   console.log(
     `[ ${pay > 0.0 ? 'PAY' : 'ZERO'} ] ${payTo} receiving ${pay} reward`
   );
   printSearched();
+  // PAY: send pay Ether to payTo
+  web3.eth.sendTransaction({
+    from: coinbase,
+    to: payTo,
+    value: web3.toWei(pay, "ether")
+  });
   res.send(`ok: ${pay}`);
 });
 
