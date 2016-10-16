@@ -1,0 +1,63 @@
+
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+body {
+  background: #ecf0f1;
+  color:#333;
+  font-family: Montserrat !important;
+  text-align: center;
+}
+body .roboto {
+  font-family: 'Roboto';
+}
+.button.deploy-drone {
+  text-decoration: none;
+  background: teal;
+  color: white;
+  padding: 5px 25px;
+  border-bottom: 2px solid #CCC;
+  margin-bottom: 20px;
+}
+.button.deploy-drone.loading {
+  background: #CCC;
+}
+.accounts {
+  display: inline-block;
+  background: #EEE;
+  border: 1px solid #CCC;
+  padding: 20px;
+  padding-top: 0px  ;
+}
+
+.accounts h1 {
+  font-family: 'Montserrat';
+}
+
+.marker {
+  width: 200px;
+  height: 200px;
+  background: rgba(214, 112, 112, 0.66);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-animation: anim 3s infinite;
+}
+
+
+@-webkit-keyframes  anim{
+  0%   { opacity: 0; width: 10px; height:10px; }
+  100% { opacity: 1; width: 200px; height:200px;}
+}
