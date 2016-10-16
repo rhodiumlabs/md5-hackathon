@@ -78,6 +78,17 @@ console.log(web3.version.node);
 
 // test to see if a local coinbase is running ... we'll need this account to interact with a contract.
 var coinbase = web3.eth.accounts[0];
+var sender = coinbase;
+
+// what contract are we going to interact with?
+var ContractAddress = '0x2956D35832635bf506B5a12B6868A44dDbF3b428';
+var receiver = ContractAddress;
+
+var amount = web3.toWei(0.001, "ether")
+
+// Send ether on successful drone delivery
+//eth.sendTransaction({from:sender, to:receiver, value: amount})
+
 
 // if default wallet/account isn't set - this won't have a value.  needed to interact with a contract.
 console.log(coinbase);
@@ -93,8 +104,7 @@ var ABIString = '[ { "constant": false, "inputs": [ { "name": "x", "type": "uint
 //  Use the string and convert to a JSON object - ABI
 var ABI = JSON.parse(ABIString);
 
-// what contract are we going to interact with?
-var ContractAddress = '0x2956D35832635bf506B5a12B6868A44dDbF3b428';
+
 
 // Set the local node default account in order to interact with the contract
 // (can't interact with a contract if it doesn't know 'who' it is interacting with)
